@@ -1,0 +1,218 @@
+/* =========================================
+   rollercoasters.css
+   From-scratch CSS (NO Bootstrap)
+   ========================================= */
+
+/* ---------- Base setup ---------- */
+:root {
+  --bg-dark: #0b1220;
+  --bg-mid: #0f172a;
+  --panel: #ffffff;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: rgba(15, 23, 42, 0.12);
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --shadow: 0 18px 45px rgba(2, 6, 23, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* font family */
+  color: var(--ink); /* font color */
+  background:
+    radial-gradient(1200px 700px at 15% -10%, rgba(37,99,235,0.35), transparent 60%),
+    radial-gradient(900px 600px at 95% 10%, rgba(56,189,248,0.22), transparent 55%),
+    linear-gradient(180deg, var(--bg-dark), var(--bg-mid)); /* custom background */
+}
+
+/* ---------- Layout containers (DIVs for positioning) ---------- */
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 16px 70px;
+}
+
+.hero {
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+/* ---------- Top navigation ---------- */
+.heroTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  color: #ffffff;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+
+.nav a:hover {
+  background: rgba(37,99,235,0.18);
+  border-color: rgba(37,99,235,0.45);
+}
+
+/* ---------- Hero content ---------- */
+.heroMain {
+  padding: 34px 22px;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(37,99,235,0.20),
+    rgba(56,189,248,0.12)
+  );
+}
+
+.heroMain h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2.2rem, 4vw, 3.0rem);
+  letter-spacing: -0.03em;
+}
+
+.heroMain p {
+  margin: 0;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.6;
+}
+
+/* ---------- Main content ---------- */
+.main {
+  margin-top: 16px;
+  background: var(--panel);
+  border-radius: 26px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Grid (DIV positioning requirement) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1.25fr 0.75fr;
+  }
+}
+
+/* ---------- Panels ---------- */
+.panel {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.small {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ---------- Lists (nested list requirement) ---------- */
+.list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.list li {
+  margin: 7px 0;
+}
+
+/* ---------- Image ---------- */
+.photo {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+}
+
+/* ---------- YouTube embed ---------- */
+.video {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--line);
+}
+
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Anchor section ---------- */
+.anchorRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.anchorRow a {
+  text-decoration: none;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+/* ---------- Tableau ---------- */
+.tableauWrap {
+  overflow: auto;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  padding: 8px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 18px;
+  text-align: center;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.95rem;
+}
