@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play Game</title>
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    .gamebox{ margin-top:10px; }
+    input{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,0.18);
+      background: #fff;
+      color: #0f172a;
+      min-width: 280px;
+      width: min(520px, 100%);
+      font-weight: 700;
+    }
+    button{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 0;
+      background: #22c55e;
+      color: #052e16;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    button.secondary{ background:#2563eb; color:#fff; }
+    button.ghost{ background: transparent; border: 1px solid rgba(15,23,42,0.18); color:#0f172a; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:end; }
+    .msg{ margin-top:10px; font-weight:900; }
+    .good{ color:#16a34a; }
+    .bad{ color:#dc2626; }
+    .muted{ color:#475569; }
+    .answers{ display:none; margin-top:10px; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="shell">
+      <div class="topbar">
+        <a class="brand" href="index.html">Landon Proctor</a>
+        <div class="nav">
+          <a href="index.html">Home</a>
+          <a href="resume.html">Resume</a>
+          <a href="lebron.html">LeBron</a>
+          <a href="rollercoasters.html">Roller Coasters</a>
+          <a class="active" href="game.html">Play Game</a>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1>Play Game</h1>
+        <p class="sub">Guess a coaster at the park shown.</p>
+      </div>
+
+      <div class="main">
+        <div class="card gamebox">
+          <h2 id="parkName">—</h2>
+          <p class="small" id="parkMeta">—</p>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <div class="section-title" style="margin:0 0 6px;">Coaster</div>
+              <input id="guess" placeholder="Type a coaster name" autocomplete="off" />
+            </div>
+            <div>
+              <button id="submitBtn">Submit</button>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <button class="secondary" id="hintBtn">Hint</button>
+            <button class="ghost" id="nextBtn">Next Park</button>
+            <button class="ghost" id="answersBtn">Show Answers</button>
+            <button class="ghost" id="resetBtn">Reset</button>
+          </div>
+
+          <div class="msg" id="msg"></div>
+
+          <div class="pillrow">
+            <span class="pill">Score: <strong id="score">0</strong></span>
+            <span class="pill">Streak: <strong id="streak">0</strong></span>
+          </div>
+
+          <div class="answers" id="answersBox">
+            <div class="section-title">Answers</div>
+            <ul class="list" id="answersList"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">© 2025 Landon Proctor</div>
+    </div>
+  </div>
+
+  <script>
+    const PARKS = [
+      { company:"Six Flags", park:"Six Flags Fiesta Texas", location:"San Antonio, TX",
+        coasters:["Iron Rattler","Wonder Woman Golden Lasso Coaster","Superman Krypton Coaster","Poltergeist","Batman The Ride","Goliath","Boomerang","Road Runner Express"] },
+      { company:"Cedar Fair", park:"Cedar Point", location:"Sandusky, OH",
+        coasters:["Millennium Force","Steel Vengeance","Maverick","Magnum XL-200","GateKeeper","Valravn","Raptor","Blue Streak"] },
+      { company:"Cedar Fair", park:"Kings Island", location:"Mason, OH",
+        coasters:["The Beast","Orion","Diamondback","Banshee","Mystic Timbers","The Racer","Flight of Fear","Backlot Stunt Coaster"] },
+      { company:"Cedar Fair", park:"Carowinds", location:"Charlotte, NC",
+        coasters:["Fury 325","Copperhead Strike","Afterburn","Intimidator","Carolina Cyclone","Vortex","Nighthawk","Hurler"] }
+    ];
+
+    const parkName = document.getElementById("parkName");
+    const parkMeta = document.getElementById("parkMeta");
+    const guess = document.getElementById("guess");
+    const msg = document.getElementById("msg");
+    const scoreEl = document.getElementById("score");
+    const streakEl = document.getElementById("streak");
+    const answersBox = document.getElementById("answersBox");
+    const answersList = document.getElementById("answersList");
+
+    function normalize(s){
+      return (s||"").toLowerCase().trim().replace(/[^a-z0-9 ]+/g,"").replace(/\s+/g," ");
+    }
+    function isMatch(g, c){
+      const gg = normalize(g), cc = normalize(c);
+      if (!gg) return false;
+      return gg === cc || cc.includes(gg) || gg.includes(cc);
+    }
+    function shuffle(a){
+      const x=[...a];
+      for(let i=x.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [x[i],x[j]]=[x[j],x[i]];
+      }
+      return x;
+    }
+
+    let order = shuffle(PARKS.map((_,i)=>i));
+    let idx=0, current=null;
+    let score=0, streak=0;
+    let seen=new Set();
+
+    function render(){
+      scoreEl.textContent = score;
+      streakEl.textContent = streak;
+    }
+
+    function loadPark(){
+      if (idx>=order.length){ order=shuffle(PARKS.map((_,i)=>i)); idx=0; }
+      current = PARKS[order[idx++]];
+      seen=new Set();
+      parkName.textContent = current.park;
+      parkMeta.textContent = `${current.company} • ${current.location}`;
+      msg.textContent = "";
+      msg.className = "msg";
+      guess.value = "";
+      answersBox.style.display = "none";
+      answersList.innerHTML = "";
+      render();
+      guess.focus();
+    }
+
+    function submit(){
+      const g = guess.value.trim();
+      if (!g){ msg.textContent="Enter a coaster name."; msg.className="msg bad"; return; }
+      const match = current.coasters.find(c=>isMatch(g,c));
+      if (!match){ msg.textContent="Not a match."; msg.className="msg bad"; streak=0; render(); return; }
+
+      const key = normalize(match);
+      if (seen.has(key)){ msg.textContent="Already counted."; msg.className="msg muted"; return; }
+
+      seen.add(key);
+      score += 1;
+      streak += 1;
+      msg.textContent="Correct.";
+      msg.className="msg good";
+      guess.value="";
+      render();
+      guess.focus();
+    }
+
+    function hint(){
+      const remaining = current.coasters.filter(c=>!seen.has(normalize(c)));
+      if (remaining.length===0){ msg.textContent="All listed coasters found."; msg.className="msg good"; return; }
+      const pick = remaining[Math.floor(Math.random()*remaining.length)];
+      msg.textContent = `Starts with "${pick[0]}".`;
+      msg.className="msg muted";
+    }
+
+    function showAnswers(){
+      answersList.innerHTML="";
+      current.coasters.forEach(c=>{
+        const li=document.createElement("li");
+        li.textContent=c;
+        answersList.appendChild(li);
+      });
+      answersBox.style.display="block";
+      streak=0;
+      render();
+    }
+
+    function resetAll(){
+      score=0; streak=0;
+      msg.textContent="";
+      msg.className="msg";
+      render();
+      guess.value="";
+      answersBox.style.display="none";
+      guess.focus();
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", submit);
+    document.getElementById("hintBtn").addEventListener("click", hint);
+    document.getElementById("nextBtn").addEventListener("click", loadPark);
+    document.getElementById("answersBtn").addEventListener("click", showAnswers);
+    document.getElementById("resetBtn").addEventListener("click", resetAll);
+    guess.addEventListener("keydown",(e)=>{ if(e.key==="Enter") submit(); });
+
+    loadPark();
+  </script>
+</body>
+</html>

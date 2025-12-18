@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roller Coasters</title>
+  <link rel="stylesheet" href="css/rollercoasters.css" />
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="hero" id="top">
+      <div class="heroTop">
+        <a class="brand" href="index.html">Landon Proctor</a>
+        <div class="nav">
+          <a href="index.html">Home</a>
+          <a href="resume.html">Resume</a>
+          <a href="lebron.html">LeBron</a>
+          <a href="game.html">Play Game</a>
+          <a href="#credits">Credits</a>
+          <a href="#video">YouTube</a>
+          <a href="#anchor">Anchor</a>
+          <a href="#tableau">Tableau</a>
+        </div>
+      </div>
+
+      <div class="heroMain">
+        <h1>Roller Coasters</h1>
+        <p><strong>My Favorite Roller Coaster:</strong> Iron Rattler (Six Flags Fiesta Texas)</p>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <div class="grid">
+        <div class="panel">
+          <h2>How I Track Coasters</h2>
+          <p class="small">Trips, ride counts, and notes.</p>
+
+          <!-- Requirement: unordered list embedded in ordered list -->
+          <ol class="list">
+            <li>Go to a park</li>
+            <li>Track rides and notes
+              <ul class="list">
+                <li>Coasters ridden</li>
+                <li>Ride count per coaster</li>
+                <li>Favorites (airtime, smoothness, intensity)</li>
+              </ul>
+            </li>
+            <li>Update my all-time coaster list</li>
+          </ol>
+        </div>
+
+        <div class="panel">
+          <h2>Photos</h2>
+         <img class="photo" src="css/assets/coaster.jpg" alt="Roller coaster photo">
+         <img class="photo" src="css/assets/titan.jpg" alt="Roller coaster photo">
+        </div>
+      </div>
+
+      <!-- All-Time Credits -->
+      <div class="panel" id="credits" style="margin-top:16px;">
+        <h2>All-Time Coaster Credits</h2>
+        <p class="small">Search by coaster name or park.</p>
+
+        <div class="controls">
+          <div class="searchWrap">
+            <input id="search" type="text" placeholder="Search: Iron Rattler, Magic Mountain, Cannibal..." />
+            <span class="badge">Total: <span id="totalCount">0</span></span>
+          </div>
+          <a href="#top" style="text-decoration:none;font-weight:900;color:#2563eb;">Back to top ↑</a>
+        </div>
+
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Coaster</th>
+                <th>Park</th>
+                <th class="mutedCell">Location</th>
+              </tr>
+            </thead>
+            <tbody id="creditsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel" id="video" style="margin-top:16px;">
+        <h2>Iron Rattler Video</h2>
+        <div class="video">
+          <iframe
+            src="https://www.youtube.com/embed/Wy5LraGCrWE"
+            title="Iron Rattler – Six Flags Fiesta Texas"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="panel" id="anchor" style="margin-top:16px;">
+        <div class="anchorRow">
+          <h2 style="margin:0;">Anchor</h2>
+          <a href="#top">Back to top ↑</a>
+        </div>
+      </div>
+
+      <div class="panel" id="tableau" style="margin-top:16px;">
+        <h2>Tableau</h2>
+
+        <div class="tableauWrap">
+          <div class='tableauPlaceholder' id='viz1765958206834' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='Roller Coaster'
+                  src='https://public.tableau.com/static/images/PY/PYP56YMZB/1_rss.png'
+                  style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='path' value='shared/PYP56YMZB' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https://public.tableau.com/static/images/PY/PYP56YMZB/1.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-US' />
+            </object>
+          </div>
+        </div>
+
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1765958206834');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';}
+          else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';}
+          else { vizElement.style.width='100%';vizElement.style.height='1327px';}
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+      </div>
+
+    </div>
+
+    <div class="footer">© 2025 Landon Proctor</div>
+  </div>
+
+  <script>
+    // Your all-time credits (Park + Location + Coasters)
+    const credits = [
+      // Six Flags Over Texas
+      { coaster:"Titan", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"New Texas Giant", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Mr. Freeze", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Batman", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Shockwave", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Joker", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"La Vibora", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Mini Mine Train", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Pandemonium", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Judge Roy Scream", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Runaway Mountain", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Runaway Mine Train", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Flashback", park:"Six Flags Over Texas", location:"Arlington, TX" },
+      { coaster:"Aquaman: PowerSplash", park:"Six Flags Over Texas", location:"Arlington, TX" },
+
+      // Six Flags Fiesta Texas
+      { coaster:"Superman Krypton Coaster", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Iron Rattler", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Wonder Woman Golden Lasso Coaster", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Goliath", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Boomerang", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Poltergeist", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Road Runner Express", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Batman", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Pandemonium", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+      { coaster:"Dr. Diabolical Cliffhanger", park:"Six Flags Fiesta Texas", location:"San Antonio, TX" },
+
+      // SeaWorld San Antonio
+      { coaster:"Steel Eel", park:"SeaWorld San Antonio", location:"San Antonio, TX" },
+      { coaster:"Great White", park:"SeaWorld San Antonio", location:"San Antonio, TX" },
+
+      // Six Flags Discovery Kingdom
+      { coaster:"Joker", park:"Six Flags Discovery Kingdom", location:"Vallejo, CA" },
+      { coaster:"Medusa", park:"Six Flags Discovery Kingdom", location:"Vallejo, CA" },
+      { coaster:"Superman Ultimate Flight", park:"Six Flags Discovery Kingdom", location:"Vallejo, CA" },
+      { coaster:"Batman", park:"Six Flags Discovery Kingdom", location:"Vallejo, CA" },
+
+      // Six Flags Magic Mountain
+      { coaster:"Viper", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Tatsu", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Goldrusher", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Twisted Colossus", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Scream", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Wonder Woman: Flight of Courage", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Batman", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Goliath", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"New Revolution", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"X2", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Ninja", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"West Coast Racers", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Full Throttle", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+      { coaster:"Apocalypse", park:"Six Flags Magic Mountain", location:"Valencia, CA" },
+
+      // Lagoon
+      { coaster:"Cannibal", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Primordial", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Jet Star", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Wicked", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Colossus: Fire Dragon", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Wild Mouse", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Roller Coaster", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"Bombara", park:"Lagoon", location:"Farmington, UT" },
+      { coaster:"The Bat", park:"Lagoon", location:"Farmington, UT" }
+    ];
+
+    const tbody = document.getElementById("creditsBody");
+    const totalCount = document.getElementById("totalCount");
+    const search = document.getElementById("search");
+
+    function renderRows(rows){
+      tbody.innerHTML = "";
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${r.coaster}</strong></td>
+          <td>${r.park}</td>
+          <td class="mutedCell">${r.location}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      totalCount.textContent = rows.length;
+    }
+
+    function filterRows(q){
+      const term = (q || "").toLowerCase().trim();
+      if (!term) return credits;
+      return credits.filter(r =>
+        r.coaster.toLowerCase().includes(term) ||
+        r.park.toLowerCase().includes(term) ||
+        r.location.toLowerCase().includes(term)
+      );
+    }
+
+    search.addEventListener("input", () => {
+      renderRows(filterRows(search.value));
+    });
+
+    // initial render sorted by park then coaster
+    const sorted = [...credits].sort((a,b) =>
+      a.park.localeCompare(b.park) || a.coaster.localeCompare(b.coaster)
+    );
+    renderRows(sorted);
+  </script>
+</body>
+</html>
